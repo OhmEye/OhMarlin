@@ -150,13 +150,14 @@ void MTWLEDLogic() // called from main loop
           MTWLEDUpdate(10,(current_position[X_AXIS]/X_MAX_POS)*50+5,(current_position[Z_AXIS]/Z_MAX_POS)*100+5,(current_position[Y_AXIS]/Y_MAX_POS)*50+5,1);
           break;
         default: // show solid color based on XYZ=RGB color values
-          int swing=abs(degTargetHotend(0) - degHotend(0)); // how far off from target temp we are
-          if(MTWLED_heated && (swing < MTWLED_swing*2)) {                  // if not heating up and within double the swing threshold
+          if(MTWLED_swing < abs(degTargetHotend(0) - degHotend(0))) {              // temp is not close to target
             if(isHeatingHotend(0)) pattern.value=MTWLEDConvert(mtwled_templow);    // heater is on so temp must be low
             if(isCoolingHotend(0)) pattern.value=MTWLEDConvert(mtwled_temphigh);   // heater is off so temp must be high
-            if(swing < MTWLED_swing) pattern.value=MTWLEDConvert(mtwled_temphit);  // close to target temp, so consider us 'at temp'
-            MTWLEDUpdate(pattern);
+          } else {                                                                 // temp is close to target
+            pattern.value=MTWLEDConvert(mtwled_temphit);                           // close to target temp, so consider us 'at temp'
           }
+          MTWLEDUpdate(pattern);
+          break;
       }
     }
 }

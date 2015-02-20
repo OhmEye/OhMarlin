@@ -1,4 +1,18 @@
-# This is the live copy of Marlin I run on my personal printers, with my own mods plus code for MakersToolWorks printers, and configured for my own preferences.
+### This is the live copy of Marlin I run on my personal printers, with my own mods plus code for MakersToolWorks printers, and configured for my own preferences.
+
+#### Some of the mods I have done:
+
+  * Status info GLCD screen for DOGM LCDs
+    * display Z coordinates to hundreds, not just tenths
+    * display SD print progress percentage numerically, not just with the bar.
+    * display endstop state by reversing X,Y,Z labels in the coordinate line
+    * display 0% instead of --- when fan is off.
+    * display long filename when printing from SD instead of short 8.3 filename
+  * Makers Tool Works LED controller
+    * send events to the MTwe LED controller introduced with the MendelMax 3 to display printer status. See bottom of Configuration.h
+  * Fan control enhancements
+    * Added a Fan Limit feature to constrain max fan speed using a panel menu item
+    * Added Fan Ramping, to slowly spin up fan. Intended to avoid shocking PID to prevent temp drops when activating fan.
 
 # Marlin 3D Printer Firmware
 <img align="right" src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
