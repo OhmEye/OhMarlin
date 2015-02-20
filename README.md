@@ -27,10 +27,12 @@
     * Set XYZ to Zero makes the current physical position 0,0,0
     * Set Z=Z+10 increases the coordinates of Z by 10 for each press. This is handy if I want to move Z below zero for some reason.
     * Home Z Axis does exactly that, for Z only
-    * Home XY Axis does exactly that, for XY only. Has no effect on my defaults because I usually have XY endstops disabled.
+    * Home XY Axis does exactly that, for XY only. Probably commented out because I usually have XY endstops disabled.
     * Zero SD Position moves the printing position in the currently selected file to the beginning
     * Motors/Fans Off turns off fans and disables steppers but does not change heaters
     * All Off turns off heaters, fans and steppers
+  * Other stuff
+    * I commented out the Contrast menu because it does nothing on any RRD style GLCD panel as far as I know
 
 Things to be aware of about my configuration if you plan to use my version on your printer:
 

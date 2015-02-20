@@ -820,7 +820,7 @@ static void lcd_control_menu()
 
 #ifdef DOGLCD
 //    MENU_ITEM_EDIT(int3, MSG_CONTRAST, &lcd_contrast, 0, 63);
-    MENU_ITEM(submenu, MSG_CONTRAST, lcd_set_contrast);
+//    MENU_ITEM(submenu, MSG_CONTRAST, lcd_set_contrast);
 #endif
 #ifdef FWRETRACT
     MENU_ITEM(submenu, MSG_RETRACT, lcd_control_retract_menu);
@@ -1217,7 +1217,7 @@ static void lcd_ohmeye_menu()
 //        MENU_ITEM(gcode, MSG_OHMEYE_SAVE, PSTR("M500"));
 //        MENU_ITEM(gcode, MSG_OHMEYE_LOAD, PSTR("M501"));
         MENU_ITEM(gcode, MSG_OHMEYE_HOME_Z, PSTR("G28 Z0"));
-        MENU_ITEM(gcode, MSG_OHMEYE_HOME_XY, PSTR("G28 X0 Y0"));
+//        MENU_ITEM(gcode, MSG_OHMEYE_HOME_XY, PSTR("G28 X0 Y0"));
         MENU_ITEM(gcode, MSG_OHMEYE_ZERO_SD, PSTR("M26 S0"));
         MENU_ITEM(function, MSG_OHMEYE_DISABLE, lcd_ohmeye_disable);
         MENU_ITEM(function, MSG_OHMEYE_ALL_OFF, lcd_ohmeye_all_off);
