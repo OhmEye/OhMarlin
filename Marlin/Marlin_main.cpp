@@ -2697,14 +2697,29 @@ Sigma_Exit:
     #if defined(FAN_PIN) && FAN_PIN > -1
       case 106: //M106 Fan On
         if (code_seen('S')){
-           fanSpeed=constrain(code_value(),0,255);
+           #ifdef FANRAMP
+           fanRamp=constrain(code_value(),0,fanLimit);
+           if(fanRamp<fanSpeed) // if new fan speed is lower than current, set immediately, otherwise let main loop ramp it up over time
+             fanSpeed=fanRamp;
+           #endif
+           #ifndef FANRAMP
+           fanSpeed=constrain(code_value(),0,fanLimit);
+           #endif
         }
         else {
-          fanSpeed=255;
+          #ifdef FANRAMP
+          fanRamp=fanLimit;
+          #endif
+          #ifndef FANRAMP
+          fanSpeed=fanLimit;
+          #endif
         }
         break;
       case 107: //M107 Fan Off
         fanSpeed = 0;
+        #ifdef FANRAMP
+        fanRamp = 0;
+        #endif
         break;
     #endif //FAN_PIN
     #ifdef BARICUDA
