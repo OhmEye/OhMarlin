@@ -184,7 +184,8 @@ static void _draw_heater_status(int x, int heater) {
 static void lcd_implementation_status_screen() {
 
   static unsigned char fan_rot = 0;
- 
+  boolean endx=0, endy=0, endz=0;
+  
   u8g.setColorIndex(1); // black on white
 
   // Symbols menu graphics, animated fan
@@ -245,24 +246,47 @@ static void lcd_implementation_status_screen() {
       u8g.print(" 0%");
     }
 
+// grab endstop values so we can represent in the coordinate status line
+  #if defined(X_MIN_PIN) && X_MIN_PIN > -1
+  endx += (READ(X_MIN_PIN)^X_MIN_ENDSTOP_INVERTING);
+  #endif
+  #if defined(X_MAX_PIN) && X_MAX_PIN > -1
+  endx += (READ(X_MAX_PIN)^X_MAX_ENDSTOP_INVERTING);
+  #endif
+  #if defined(Y_MIN_PIN) && Y_MIN_PIN > -1
+  endy += (READ(Y_MIN_PIN)^Y_MIN_ENDSTOP_INVERTING);
+  #endif
+  #if defined(Y_MAX_PIN) && Y_MAX_PIN > -1
+  endy += (READ(Y_MAX_PIN)^Y_MAX_ENDSTOP_INVERTING);
+  #endif
+  #if defined(Z_MIN_PIN) && Z_MIN_PIN > -1
+  endz += (READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING);
+  #endif
+  #if defined(Z_MAX_PIN) && Z_MAX_PIN > -1
+  endz += (READ(Z_MAX_PIN)^Z_MAX_ENDSTOP_INVERTING);
+  #endif
+
   // X, Y, Z-Coordinates
   u8g.setFont(FONT_STATUSMENU);
   u8g.drawBox(0,29,128,10);
   u8g.setColorIndex(0); // white on black
   u8g.setPrintPos(2,37);
-  u8g.print("X");
+  endx ? u8g.print("X") : u8g.print("x"); // upper case if endstop triggered.
+//  u8g.print("X");
   //u8g.drawPixel(8,33);
   //u8g.drawPixel(8,35);
   u8g.setPrintPos(8,37);
   u8g.print(ftostr31ns(current_position[X_AXIS]));
   u8g.setPrintPos(41,37);
-  lcd_printPGM(PSTR("Y"));
+  endy ? u8g.print("Y") : u8g.print("y"); // upper case if endstop triggered.
+//  lcd_printPGM(PSTR("Y"));
   //u8g.drawPixel(49,33);
   //u8g.drawPixel(49,35);
   u8g.setPrintPos(47,37);
   u8g.print(ftostr31ns(current_position[Y_AXIS]));
   u8g.setPrintPos(79,37);
-  u8g.print("Z");
+  endz ? u8g.print("Z") : u8g.print("z"); // upper case if endstop triggered.
+//  u8g.print("Z");
   //u8g.drawPixel(89,33);
   //u8g.drawPixel(89,35);
   u8g.setPrintPos(85,37);

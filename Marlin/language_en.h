@@ -243,7 +243,7 @@
 #define MSG_REFRESH                         "Refresh"
 #endif
 #ifndef MSG_WATCH
-#define MSG_WATCH                           "Info screen"
+#define MSG_WATCH                           "Status screen"
 #endif
 #ifndef MSG_PREPARE
 #define MSG_PREPARE                         "Prepare"
@@ -297,7 +297,7 @@
 #define MSG_CONTROL_RETRACTF                "Retract  V"
 #endif
 #ifndef MSG_CONTROL_RETRACT_ZLIFT
-#define MSG_CONTROL_RETRACT_ZLIFT           "Hop mm"
+#define MSG_CONTROL_RETRACT_ZLIFT           "Z Lift mm"
 #endif
 #ifndef MSG_CONTROL_RETRACT_RECOVER
 #define MSG_CONTROL_RETRACT_RECOVER         "UnRet +mm"
@@ -309,13 +309,13 @@
 #define MSG_CONTROL_RETRACT_RECOVERF        "UnRet  V"
 #endif
 #ifndef MSG_AUTORETRACT
-#define MSG_AUTORETRACT                     "AutoRetr."
+#define MSG_AUTORETRACT                     "AutoRetract"
 #endif
 #ifndef MSG_FILAMENTCHANGE
 #define MSG_FILAMENTCHANGE                  "Change filament"
 #endif
 #ifndef MSG_INIT_SDCARD
-#define MSG_INIT_SDCARD                     "Init. SD card"
+#define MSG_INIT_SDCARD                     "Init SD card"
 #endif
 #ifndef MSG_CNG_SDCARD
 #define MSG_CNG_SDCARD                      "Change SD card"

@@ -124,7 +124,7 @@ void MTWLEDLogic() // called from main loop
   
   if(MTWLED_control==1 || MTWLED_control==255) return;
   if(MTWLEDEndstop(false)) return;
-  if(pattern.value==mtwled_nochange) return;
+//  if(pattern.value==mtwled_nochange) return;
   if(MTWLED_timer > millis()) return;
   if(MTWLED_control==-1) { // if this is first time display endstop status before clearing to ready
      MTWLEDEndstop(true);
