@@ -9,17 +9,35 @@
     * display 0% instead of --- when fan is off.
     * display long filename when printing from SD instead of short 8.3 filename
   * Makers Tool Works LED controller
-    * send events to the MTwe LED controller introduced with the MendelMax 3 to display printer status. See bottom of Configuration.h
+    * send events to the MTW LED controller introduced with the MendelMax 3 to display printer status. See bottom of Configuration.h
   * Fan control enhancements
     * Added a Fan Limit feature to constrain max fan speed using a panel menu item
     * Added Fan Ramping, to slowly spin up fan. Intended to avoid shocking PID to prevent temp drops when activating fan.
+  * I added a custom 'OhmEye' menu at the top level
+    * Purge Extruder does a short extrude
+    * Select SD File to preselect a file on SD card without printing immediately
+    * Print Selected file immediately begins printing preselected file
+    * Move Z to 0 does exactly that
+    * Preheat Bed does exactly that
+    * Preheat PLA activates the current PLA profile
+    * Preheat ABS activates the current ABS profile
+    * Move Z allows manually moving Z axis in 1mm increments
+    * Flow Rate sets the extrusion multiplier for extruder 0, default is 100%
+    * Max Fan sets the maximum fan speed. Any command to spin the fan higher than this value will reduce to this value
+    * Set XYZ to Zero makes the current physical position 0,0,0
+    * Set Z=Z+10 increases the coordinates of Z by 10 for each press. This is handy if I want to move Z below zero for some reason.
+    * Home Z Axis does exactly that, for Z only
+    * Home XY Axis does exactly that, for XY only. Has no effect on my defaults because I usually have XY endstops disabled.
+    * Zero SD Position moves the printing position in the currently selected file to the beginning
+    * Motors/Fans Off turns off fans and disables steppers but does not change heaters
+    * All Off turns off heaters, fans and steppers
 
 Things to be aware of about my configuration if you plan to use my version on your printer:
 
   * I may have FWRETRACT enabled in Configuration_adv.h
   * I probably have the X and Y endstop pins disabled in the board files for RAMBO and RAMPS
   * I probably have the MTWLED stuff enabled
-  * If you have a MendleMax3, my esteps probably is way wrong for your printer
+  * Even if you have a MendleMax3, my esteps value is probably way wrong for your printer
   * I have the kill pin disabled for my board configs
   * I have the beeper disabled for my board configs
   * I have my XY jerk set higher than most people use
