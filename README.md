@@ -5,7 +5,7 @@
   * Status info GLCD screen for DOGM LCDs
     * display Z coordinates to hundreds, not just tenths
     * display SD print progress percentage numerically, not just with the bar.
-    * display endstop state by reversing X,Y,Z labels in the coordinate line
+    * display endstop state by toggling capitalization of X,Y,Z labels in the coordinate line
     * display 0% instead of --- when fan is off.
     * display long filename when printing from SD instead of short 8.3 filename
   * Makers Tool Works LED controller
@@ -13,6 +13,16 @@
   * Fan control enhancements
     * Added a Fan Limit feature to constrain max fan speed using a panel menu item
     * Added Fan Ramping, to slowly spin up fan. Intended to avoid shocking PID to prevent temp drops when activating fan.
+
+Things to be aware of about my configuration if you plan to use my version on your printer:
+
+  * I may have FWRETRACT enabled in Configuration_adv.h
+  * I probably have the X and Y endstop pins disabled in the board files for RAMBO and RAMPS
+  * I probably have the MTWLED stuff enabled
+  * If you have a MendleMax3, my esteps probably is way wrong for your printer
+  * I have the kill pin disabled for my board configs
+  * I have the beeper disabled for my board configs
+  * I have my XY jerk set higher than most people use
 
 # Marlin 3D Printer Firmware
 <img align="right" src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
