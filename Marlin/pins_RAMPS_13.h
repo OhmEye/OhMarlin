@@ -22,13 +22,13 @@
 #define X_STEP_PIN         54
 #define X_DIR_PIN          55
 #define X_ENABLE_PIN       38
-#define X_MIN_PIN           3
+#define X_MIN_PIN           -1 //3
 #define X_MAX_PIN           2
 
 #define Y_STEP_PIN         60
 #define Y_DIR_PIN          61
 #define Y_ENABLE_PIN       56
-#define Y_MIN_PIN          14
+#define Y_MIN_PIN          -1 //14
 #define Y_MAX_PIN          15
 
 #define Z_STEP_PIN         46
@@ -77,7 +77,7 @@
 #define PS_ON_PIN          12
 
 #if defined(REPRAP_DISCOUNT_SMART_CONTROLLER) || defined(G3D_PANEL)
-  #define KILL_PIN           41
+  #define KILL_PIN           -1 //41
 #else
   #define KILL_PIN           -1
 #endif
@@ -146,7 +146,7 @@
     #define LCD_PINS_D7 29
 
     #ifdef REPRAP_DISCOUNT_SMART_CONTROLLER
-      #define BEEPER 37
+      #define BEEPER -1 //37
 
       #define BTN_EN1 31
       #define BTN_EN2 33
@@ -159,7 +159,7 @@
       #define BTN_ENC 32
       #define LCD_SDSS 53
       #define SDCARDDETECT -1
-      #define KILL_PIN 41
+      #define KILL_PIN -1 //41
     #elif defined(LCD_I2C_VIKI)
       #define BTN_EN1 22  // reverse if the encoder turns the wrong way.
       #define BTN_EN2 7
@@ -168,7 +168,7 @@
       #define SDCARDDETECT 49
     #else
       // arduino pin which triggers an piezzo beeper
-      #define BEEPER 33  // Beeper on AUX-4
+      #define BEEPER -1 //33  // Beeper on AUX-4
 
       // buttons are directly attached using AUX-2
       #ifdef REPRAPWORLD_KEYPAD
@@ -194,7 +194,7 @@
 
   #else // Old-style panel with shift register
     // Arduino pin witch triggers an piezzo beeper
-    #define BEEPER 33   // No Beeper added
+    #define BEEPER -1 //33   // No Beeper added
 
     // Buttons are attached to a shift register
     // Not wired yet
