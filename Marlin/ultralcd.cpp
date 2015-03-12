@@ -1248,7 +1248,11 @@ static void lcd_ohmeye_all_off()
 static void lcd_ohmeye_addz()
 {
         current_position[Z_AXIS]+=10;
+<<<<<<< HEAD
         plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+=======
+	plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+>>>>>>> b57d44b38a92927b551f9a1f0f1c92cba762b0f2
 }
 
 #endif // OHMEYEMENU
