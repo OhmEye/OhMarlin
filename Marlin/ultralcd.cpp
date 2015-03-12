@@ -1227,7 +1227,7 @@ static void lcd_ohmeye_menu()
 
 static void lcd_ohmeye_purge() // extrude 2mm
 {
-        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]+1, 3, active_extruder);
+        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]+1, 4, active_extruder);
         enquecommands_P(PSTR("G92 E0"));
 }
 

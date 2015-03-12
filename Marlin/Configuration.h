@@ -910,6 +910,10 @@ M242 P<pattern ID> R<red> E<green> B<blue> T<timer> C<command>
       15 RGB 	Color Chase Single Led
       16 RGB 	Slow fill then solid
       17 RGB	Repeating Blink
+      
+NOTES:
+  Make sure the logic for any endstops that are not installed defaults to untriggered, or disable the endstop pins. Otherwise the
+  LED endstop status may override other events.
 */
 #define OHMEYEMENU // adds a custom menu to the LCD with the functions OhmEye uses all in one place.
 #ifdef OHMEYEMENU
