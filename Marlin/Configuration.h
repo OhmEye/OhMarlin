@@ -58,9 +58,9 @@ Here are some standard links for getting your machine calibrated:
 
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
-#ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMBO
-#endif
+//#ifndef MOTHERBOARD
+  #define MOTHERBOARD BOARD_RAMPS_13_EFB
+//#endif
 
 // Define this to set a custom name for your generic Mendel,
 // #define CUSTOM_MENDEL_NAME "This Mendel"
@@ -119,7 +119,7 @@ Here are some standard links for getting your machine calibrated:
 // 147 is Pt100 with 4k7 pullup
 // 110 is Pt100 with 1k pullup (non standard)
 
-#define TEMP_SENSOR_0 5
+#define TEMP_SENSOR_0 1
 #define TEMP_SENSOR_1 -1
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -146,11 +146,11 @@ Here are some standard links for getting your machine calibrated:
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 300
+#define HEATER_0_MAXTEMP 275
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define BED_MAXTEMP 120
 
 // If your bed has low resistance e.g. .6 ohm and throws the fuse you can duty cycle it to reduce the
 // average current. The value should be an integer and the heat bed will be turned on for 1 interval of
@@ -169,7 +169,7 @@ Here are some standard links for getting your machine calibrated:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
 #define BANG_MAX 192 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 236 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_MAX 224 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -178,7 +178,7 @@ Here are some standard links for getting your machine calibrated:
                                     // Set/get with gcode: M301 E[extruder number, 0-2]
   #define PID_FUNCTIONAL_RANGE 48 // If the temperature difference between the target temperature and the actual temperature
                                   // is more then PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
-  #define PID_INTEGRAL_DRIVE_MAX PID_MAX  //limit for the integral term
+  #define PID_INTEGRAL_DRIVE_MAX 255//limit for the integral term
   #define K1 0.95 //smoothing factor within the PID
   #define PID_dT ((OVERSAMPLENR * 10.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
@@ -189,9 +189,14 @@ Here are some standard links for getting your machine calibrated:
 //    #define  DEFAULT_Kd 114
 
 // OhmEye MM3 E3D V6 E0
-      #define  DEFAULT_Kp 18.82
-      #define  DEFAULT_Ki 1.47
-      #define  DEFAULT_Kd 60.12
+//      #define  DEFAULT_Kp 18.82
+//      #define  DEFAULT_Ki 1.47
+//      #define  DEFAULT_Kd 60.12
+
+// OhmEye MM2 24v cart jhead
+      #define  DEFAULT_Kp 12.39
+      #define  DEFAULT_Ki 0.74
+      #define  DEFAULT_Kd 51.77
 
 // MakerGear
 //    #define  DEFAULT_Kp 7.0
@@ -324,7 +329,7 @@ your extruder heater takes 2 minutes to hit the target on heating.
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
 const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
 const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool X_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Y_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
 const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
@@ -364,7 +369,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 // Travel limits after homing (units are in mm)
 #define X_MAX_POS 230
 #define X_MIN_POS 0
-#define Y_MAX_POS 310
+#define Y_MAX_POS 300
 #define Y_MIN_POS 0
 #define Z_MAX_POS 190
 #define Z_MIN_POS 0
@@ -511,7 +516,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,1600,265}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,1600,99}
 #define DEFAULT_MAX_FEEDRATE          {500, 500, 5, 25}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
@@ -559,7 +564,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define PLA_PREHEAT_HPB_TEMP 58
 #define PLA_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
-#define ABS_PREHEAT_HOTEND_TEMP 232
+#define ABS_PREHEAT_HOTEND_TEMP 228
 #define ABS_PREHEAT_HPB_TEMP 112
 #define ABS_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
@@ -852,7 +857,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 * MTW LED I2C controller support
 * Sponsored by Makers Tool Works
 **********************************************************************/
-#define MTWLED  // uncomment if using Makers Tool Works LED controller
+//#define MTWLED  // uncomment if using Makers Tool Works LED controller
 #ifdef MTWLED
 
 // patterns
@@ -919,7 +924,7 @@ NOTES:
 #ifdef OHMEYEMENU
 #define FAN_MAX 255
 #endif
-#define REVERSE_ENCODER
+//#define REVERSE_ENCODER
 #define LONGFILENAME
 #define FANRAMP
 #ifdef FANRAMP
