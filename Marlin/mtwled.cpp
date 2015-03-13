@@ -93,7 +93,6 @@ boolean MTWLEDEndstop(boolean force)
 {
   boolean endx=0, endy=0, endz=0;
 
-  #ifndef DISABLE_MAX_ENDSTOPS
     #if defined(X_MAX_PIN) && X_MAX_PIN > -1
     if(force || current_position[X_AXIS]!=X_MAX_POS) endx += (READ(X_MAX_PIN)^X_MAX_ENDSTOP_INVERTING);
     #endif
@@ -103,9 +102,7 @@ boolean MTWLEDEndstop(boolean force)
     #if defined(Z_MAX_PIN) && Z_MAX_PIN > -1
     if(force || current_position[Z_AXIS]!=Z_MAX_POS) endz += (READ(Z_MAX_PIN)^Z_MAX_ENDSTOP_INVERTING);
     #endif
-  #endif
   
-  #ifndef DISABLE_MIN_ENDSTOPS
     #if defined(X_MIN_PIN) && X_MIN_PIN > -1
     if(force || current_position[X_AXIS]!=0) endx += (READ(X_MIN_PIN)^X_MIN_ENDSTOP_INVERTING);
     #endif
@@ -115,7 +112,6 @@ boolean MTWLEDEndstop(boolean force)
     #if defined(Z_MIN_PIN) && Z_MIN_PIN > -1
     if(force || current_position[Z_AXIS]!=0) endz += (READ(Z_MIN_PIN)^Z_MIN_ENDSTOP_INVERTING);
     #endif
-  #endif
   
   if(force || endx || endy || endz) {
       MTWLEDUpdate(2,endx,endy,endz,MTWLED_endstoptimer);
@@ -138,8 +134,8 @@ void MTWLEDLogic() // called from main loop
      return;
   }
 
-  if((degTargetHotend(0) == 0)) { // assume not printing since target temp is zero
-    if((degHotend(0) > MTWLED_cool)) // heater is off but still warm
+  if((degTargetHotend(active_extruder) == 0)) { // assume not printing since target temp is zero
+    if((degHotend(active_extruder) > MTWLED_cool)) // heater is off but still warm
       pattern.value=MTWLEDConvert(mtwled_heateroff);
     else {
       pattern.value=MTWLEDConvert(mtwled_ready);
@@ -155,10 +151,11 @@ void MTWLEDLogic() // called from main loop
         case 1: // XYZ position used as RBG
           MTWLEDUpdate(10,(current_position[X_AXIS]/X_MAX_POS)*50+5,(current_position[Z_AXIS]/Z_MAX_POS)*100+5,(current_position[Y_AXIS]/Y_MAX_POS)*50+5,1);
           break;
+        case 0:
         default: // show solid color based on XYZ=RGB color values
-          if(MTWLED_swing < abs(degTargetHotend(0) - degHotend(0))) {              // temp is not close to target
-            if(isHeatingHotend(0)) pattern.value=MTWLEDConvert(mtwled_templow);    // heater is on so temp must be low
-            if(isCoolingHotend(0)) pattern.value=MTWLEDConvert(mtwled_temphigh);   // heater is off so temp must be high
+          if(abs(degTargetHotend(active_extruder) - degHotend(active_extruder)) > MTWLED_swing) {              // temp is not close to target
+            if(isHeatingHotend(active_extruder)) pattern.value=MTWLEDConvert(mtwled_templow);    // heater is on so temp must be low
+            if(isCoolingHotend(active_extruder)) pattern.value=MTWLEDConvert(mtwled_temphigh);   // heater is off so temp must be high
           } else {                                                                 // temp is close to target
             pattern.value=MTWLEDConvert(mtwled_temphit);                           // close to target temp, so consider us 'at temp'
           }
@@ -174,12 +171,15 @@ void MTWLEDTemp() // called from inside heater function while heater is on to do
         if(MTWLED_heated) return;
         if(MTWLED_control==255) return;
         if((degTargetHotend(active_extruder) == 0)) return;
-	if(abs(degTargetHotend(active_extruder) - degHotend(active_extruder)) > MTWLED_swing*2) {
 	  percent = ((degHotend(active_extruder) / (degTargetHotend(active_extruder))) * 100);
-	  if(percent > 100) percent = 100;
-          if(degHotend(active_extruder) >= degTargetHotend(active_extruder)) MTWLED_heated=true;
+	  if(percent >= 100) {
+            percent = 100;
+            MTWLED_heated=true;
+            if(MTWLED_feedback) {
+              SERIAL_PROTOCOLLN("LED heated. Entering printmode");
+            }
+          }
 	  MTWLEDUpdate(9,percent,MTWLED_heatmode,0);
-	}
 }
 
 #endif //MTWLED

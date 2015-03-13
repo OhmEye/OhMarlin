@@ -924,7 +924,7 @@ NOTES:
 #ifdef OHMEYEMENU
 #define FAN_MAX 255
 #endif
-//#define REVERSE_ENCODER
+#define REVERSE_ENCODER
 #define LONGFILENAME
 #define FANRAMP
 #ifdef FANRAMP
