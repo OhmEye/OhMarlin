@@ -97,8 +97,8 @@ static volatile bool temp_meas_ready = false;
   static float pid_error[EXTRUDERS];
   static float temp_iState_min[EXTRUDERS];
   static float temp_iState_max[EXTRUDERS];
-  // static float pid_input[EXTRUDERS];
-  // static float pid_output[EXTRUDERS];
+  static float pid_input;
+  static float pid_output;
   static bool pid_reset[EXTRUDERS];
 #endif //PIDTEMP
 #ifdef PIDTEMPBED
@@ -481,8 +481,8 @@ void checkExtruderAutoFans()
 
 void manage_heater()
 {
-  float pid_input;
-  float pid_output;
+  //float pid_input;
+  //float pid_output;
 
   if(temp_meas_ready != true)   //better readability
     return; 
