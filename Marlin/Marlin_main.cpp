@@ -2483,7 +2483,15 @@ Sigma_Exit:
 #endif		// ENABLE_AUTO_BED_LEVELING
 
     case 104: // M104
-      if(setTargetedHotend(104)){
+      if (code_seen('T')){  // ohmeye hack to set temp independently and not cause a tool change if not active extruder
+        int t_extr = code_value();
+        if ((t_extr >= 0) && (t_extr <= EXTRUDERS)) // make sure T is in range of valie extruders
+         if (code_seen('S')) {
+           target_temperature[t_extr] = constrain(code_value(),0,HEATER_0_MAXTEMP); // crude but pin all temps to hotend 0 for now
+         }
+         break;
+      }
+      if(setTargetedHotend(104)){  // should not get here if T was not used so behave as previous
         break;
       }
       if (code_seen('S')) setTargetHotend(code_value(), tmp_extruder);
